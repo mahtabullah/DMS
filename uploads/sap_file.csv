@@ -1,0 +1,4 @@
+    DeliveryChallanNumber,DeliveryChallanDate,CustomerID,ProductID,ConversionFactor,Quantity
+1002,7/18/2016,100000424,76,12,23.5
+1002,7/18/2016,100000424,86,6,27.5
+1002,7/18/2016,100000424,12,24,23.5
