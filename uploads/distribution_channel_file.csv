@@ -1,9 +1,0 @@
-route_id,route_name,route_code,distribution_channel_category,sub_route_name,sub_route_code,sub_route_description,biz_zone_id,biz_zone_name,dbhouse_name,db_id
-7586,Briddi,01,2,C Khilgaon Briddi 1 ,0101,C Khilgaon Briddi 1 ,48,CE_Mugda,"Sikder Enterprise,",72
-7586,Briddi,01,2,Taltola Briddi 2 ,0102,Taltola Briddi 2 ,48,CE_Mugda,"Sikder Enterprise,",72
-7587,Route 2,02,2,Tilpapara,0201,Tilpapara,48,CE_Mugda,"Sikder Enterprise,",72
-7587,Route 2,02,2,A Khilgaon,0202,A Khilgaon,48,CE_Mugda,"Sikder Enterprise,",72
-7587,Route 2,02,2,B Khilgaon,0203,B Khilgaon,48,CE_Mugda,"Sikder Enterprise,",72
-7588,Route 3,03,2,Malibag,0301,Malibag,48,CE_Mugda,"Sikder Enterprise,",72
-7588,Route 3,03,2,C khilgaon,0302,C khilgaon,48,CE_Mugda,"Sikder Enterprise,",72
-7589,Ready Sale,04,2,Chinese Restaurant,0401,Chinese Restaurant,48,CE_Mugda,"Sikder Enterprise,",72
