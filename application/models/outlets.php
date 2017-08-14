@@ -12,7 +12,7 @@ class Outlets extends CI_Model {
     function getOutletDbId($db_id) {
         $sql = "SELECT A.id As outlet_id,A.outlet_code,A.outlet_name,B.address_name,A.outlet_owner,B.mobile1,A.visicooler,A.status,C.db_channel_element_name 
                 FROM `tbld_outlet` As A 
-                INNER JOIN tbld_address As B On A.outlet_address_id=B.id 
+                left JOIN tbld_address As B On A.outlet_address_id=B.id 
                 INNER join tbld_distribution_route As C on A.Parent_id=C.id
                 where A.dbhouse_id IN ($db_id)";
         

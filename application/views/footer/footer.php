@@ -16,7 +16,6 @@
 <script src="<?php echo base_url(); ?>plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 <script src="<?php echo base_url(); ?>dist/js/app.min.js"></script>
@@ -29,7 +28,12 @@
 <script src="<?php echo base_url(); ?>plugins/daterangepicker/daterangepicker.js"></script>
 <script src="<?php echo base_url(); ?>plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="<?php echo base_url(); ?>plugins/datatables/extensions/FixedHeader/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url(); ?>plugins/js2/dataTables.tableTools.js"></script>
+
+
+
 <script>
     jQuery(document).ready(function () {
         var pathname = $(location).attr('href');
