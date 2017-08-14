@@ -22,14 +22,17 @@ class order extends CI_Controller {
     public function index() {
         $db_id = $this->session->userdata('db_id');
         $data["PSR"] = $this->orders->getDbpSrList($db_id);
-
-
+        $this->load->view('order/index', $data);
+    }
+    public function allorder() {
+        $db_id = $this->session->userdata('db_id');
+        $data["PSR"] = $this->orders->getDbpSrList($db_id);
         $this->load->view('order/index', $data);
     }
 
     public function create() {
-        $spoke_id = $this->session->userdata('spoke_id');
-        $data['outlet_type_name'] = $this->orders->getOutletTypesByIds($spoke_id);
+
+        $data['outlet_type_name'] = $this->orders->getsalesTypes();
         $this->load->view('order/create', $data);
     }
 
@@ -37,8 +40,8 @@ class order extends CI_Controller {
         $type = $this->input->post('sales_order_type');
         $db_id = $this->session->userdata('db_id');
         $data['type'] = $type;
-        if ($type == 'adhoc') {
-            $data['title'] = 'ADHOC Sales';
+        if ($type == 'regular') {
+            $data['title'] = 'Regular Sales';
             $data['subroute'] = $this->orders->getAllsubroute($db_id);
 
             $this->load->view('order/part/regular.php', $data);
@@ -280,10 +283,6 @@ class order extends CI_Controller {
         }
         echo $option;
     }
-
-
-
-
 
 
     public function getDdPrice() {

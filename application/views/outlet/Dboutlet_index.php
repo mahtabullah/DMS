@@ -79,10 +79,6 @@ $this->load->view('left/left', $data);
                                                         ?>
                                                     </td>
                                                    
-    <!--                                            <td class="center">
-                                                    <?php
-                                                    // echo $key['outlet_type_name'];
-                                                    ?>
                                                 </td>-->
                                                     <td class="center">
                                                         <?php

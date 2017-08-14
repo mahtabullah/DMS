@@ -61,26 +61,26 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                                 SL No.
                             </th>
                             <th>
-                                Sub Route Plan Name
+                                Route Plan Name
                             </th>
                             <th>
-                                Sub Route Plan Code
+                                Route Plan Code
                             </th>
-                            <th>
-                                Sub Route Plan Instances
-                            </th>
-                           
+                                                       
                             <th>
                                 Distributor Name
                             </th>
                             <th>
-                                Sales Representative
+                                PSR Name
                             </th>
                             <th>
                                 Start Date
                             </th>
                             <th>
                                 End Date
+                            </th>
+                            <th>
+                                Modify date
                             </th>
                             <th>
                                 Action
@@ -90,7 +90,7 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                     <tbody>
                         <?php 
                         $sl=1;
-                        foreach ($route_plan_instance as $rp_i) { ?>
+                        foreach ($Route_plan as $rp_i) { ?>
                             <tr>
                                 <td>
                                     <?php echo $sl;$sl++; ?>
@@ -101,9 +101,7 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                                 <td>
                                     <?php echo $rp_i['route_plan_code']; ?>
                                 </td>
-                                <td>
-                                    <?php echo $rp_i['route_plan_instance_code']; ?>
-                                </td>
+                               
                                 <td>
                                     <?php echo $rp_i['dbhouse_name']; ?>
                                 </td>
@@ -115,6 +113,9 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                                 </td>
                                 <td>
                                     <?php echo date('d-m-Y',strtotime($rp_i['end_date'])); ?>
+                                </td>
+                                 <td>
+                                    <?php echo date('d-m-Y',strtotime($rp_i['Modify_date'])); ?>
                                 </td>
                                 <td class="">
                                     <a href="<?php

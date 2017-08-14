@@ -3,16 +3,22 @@
 class Route_plans extends CI_Model {
 
     
-    public function getAllRoutePlanInstances($where){
-        $sql = "SELECT t2.id,t1.route_plan_name,t1.route_plan_code,t2.route_plan_instance_name as route_plan_instance_code,t3.first_name,t2.start_date,t2.end_date,t4.dbhouse_name FROM `tbld_route_plan` as t1
-                inner join tbld_route_plan_instance as t2 on t1.id = t2.route_plan_id 
-                inner join tbld_distribution_employee as t3 on t2.dist_emp_id = t3.id 
+    public function getAllRoutePlan($db_id){
+        $sql = "SELECT t1.id,t1.route_plan_name,t1.route_plan_code,t4.dbhouse_name,t3.first_name,t1.Modify_date,t1.start_date,end_date FROM `tbld_route_plan` as t1
+                    inner join tbld_distribution_employee as t3 on t1.dist_emp_id = t3.id 
                 left join tbld_distribution_house as t4 on t1.dbhouse_id=t4.id
-                $where
-                ";
-        $query = $this->db->query($sql)->result_array();
-        return $query;
+                where t1.dbhouse_id=$db_id ";
+        $result = $this->db->query($sql)->result_array();
+        return $result;
     }
+    
+     public function getDbpSrList($db_id)
+        {
+            $sql   = "SELECT id,first_name as name FROM `tbld_distribution_employee` where distribution_house_id=$db_id and dist_role_id=2";
+            $query = $this->db->query($sql)->result_array();
+
+            return $query;
+        }
 
     public function total($search) {
         if ($search != '') {
@@ -85,22 +91,6 @@ class Route_plans extends CI_Model {
 
     public function get_route_plan_by_id($id) {
         $this->db->select('*');
-        $this->db->from('tbld_route_plan');
-        $this->db->where("id", $id);
-        $query = $this->db->get()->result_array();
-        return $query;
-    }
-
-    public function get_route_plan_instance_by_id($id) {
-        $this->db->select('*');
-        $this->db->from('tbld_route_plan_instance');
-        $this->db->where("id", $id);
-        $query = $this->db->get()->result_array();
-        return $query;
-    }
-
-    public function getRpName($id) {
-        $this->db->select('route_plan_name,route_plan_code');
         $this->db->from('tbld_route_plan');
         $this->db->where("id", $id);
         $query = $this->db->get()->result_array();

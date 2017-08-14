@@ -34,7 +34,7 @@ $this->load->view('left/left', $data);
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="route_plan_description">Sub Route Plan Description</label>
-                                            <textarea class="form-control" rows="1" id="route_description" name="route_plan_description" placeholder="Enter Route Description"></textarea>
+                                            <textarea class="form-control" rows="1" id="route_description" name="route_plan_desc" placeholder="Enter Route Description"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='sat_routes' name="sat_routes[]" size=10 multiple class="routes" style="height:30%; width:50%;">
+                                                <select id='sat_routes' name="sat_routes[]"  class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -100,7 +100,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='sun_routes' name="sun_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='sun_routes' name="sun_routes[]" class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -117,7 +117,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='mon_routes' name="mon_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='mon_routes' name="mon_routes[]"  class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -131,7 +131,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='tue_routes' name="tue_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='tue_routes' name="tue_routes[]"  class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -148,7 +148,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='wed_routes' name="wed_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='wed_routes' name="wed_routes[]"  class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -162,7 +162,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='thu_routes' name="thu_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='thu_routes' name="thu_routes[]" class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -179,7 +179,7 @@ $this->load->view('left/left', $data);
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <select id='fri_routes' name="fri_routes[]" multiple size=10 class="routes" style="height:30%; width:50%;">
+                                                <select id='fri_routes' name="fri_routes[]"  class="routes" style="height:30%; width:50%;">
                                                     <option value="0" selected="selected"></option>
                                                 </select>
                                             </div>
@@ -214,7 +214,7 @@ $this->load->view('footer/footer');
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(),
                 nowDate.getDate(), 0, 0, 0, 0);
 
-        $(".select2").select2({
+        $(".select2,.routes").select2({
             placeholder: "Select..",
             allowClear: true
         });
@@ -263,6 +263,7 @@ $this->load->view('footer/footer');
 
                 $("#sat_routes,#sun_routes,#mon_routes,#tue_routes,#wed_routes,#thu_routes,#fri_routes").empty();
                 $("#sat_routes,#sun_routes,#mon_routes,#tue_routes,#wed_routes,#thu_routes,#fri_routes").append(data);
+                $("#sat_routes,#sun_routes,#mon_routes,#tue_routes,#wed_routes,#thu_routes,#fri_routes").select2();
 
             }
         });

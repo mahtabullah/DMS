@@ -60,6 +60,7 @@ $this->load->view('left/left', $data);
                                             <label class="control-label">PSR</label>
                                              
                                             <select class="form-control select2" id="PSR" onchange="">
+                                                <option ></option>
                                                 <?php foreach ($PSR As $Emp) { ?>                                                 
                                                     <option ><?php echo $Emp[name]; ?></option>
                                                     <?php

@@ -295,18 +295,11 @@
             return $query;
         }
 
-        public function getOutletTypesByIds($spoke_id)
+        public function getsalesTypes()
         {
 
-            /*..............Some DBhouse Have Spoke Then This Condition(START)............*/
-            if( !empty($spoke_id)){
-                $id = "2,5,6,7,8,9,10,11";
-            } else{
-                $id = "2,5,6,7,8,9,10";
-            }
-            /*..............Some DBhouse Have Spoke Then This Condition(END)............*/
-
-            $sql   = "Select * from tbld_outlet_type where id in($id)";
+            
+            $sql   = "Select * from tbld_outlet_type";
             $query = $this->db->query($sql)->result_array();
 
             return $query;
