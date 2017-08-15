@@ -11,6 +11,8 @@ class order extends CI_Controller {
         $this->load->model('orders');
         $this->load->model('Bundle_prices');
         $this->load->model('Outlets');
+        $this->load->model('Route_plans');
+        
 
         // $this->method_call = &get_instance();
     }
@@ -38,16 +40,20 @@ class order extends CI_Controller {
         $data['outlet_type_name'] = $this->orders->getsalesTypes();
         $this->load->view('order/create', $data);
     }
+    
+    
 
     public function getInfoSales_order_type() {
         $type = $this->input->post('sales_order_type');
         $db_id = $this->session->userdata('db_id');
+       
         $data['type'] = $type;
         if ($type == 'regular') {
             $data['title'] = 'Regular Sales';
-            $data['subroute'] = $this->orders->getAllsubroute($db_id);
+            $data['PSR'] = $this->Route_plans->getDbpSrList($db_id);
+            //$data['subroute'] = $this->orders->getAllsubroute($db_id);
 
-            $this->load->view('order/part/regular.php', $data);
+           $this->load->view('order/part/regular.php', $data);
         } else if ($type == 'regular_from_pc') {
             $data['title'] = 'Regular Sales';
             $data['subroute'] = $this->orders->getAllsubroute($db_id);
@@ -59,8 +65,6 @@ class order extends CI_Controller {
     public function gerOrderPart() {
         $sales_order_type = $this->input->post('type');
         $outlet_id = $this->input->post('outlet_id');
-
-
         $this->load->view('order/part/order', $data);
     }
 
@@ -77,6 +81,23 @@ class order extends CI_Controller {
             echo $option;
         }
     }
+    public function getRoutebByPSR() {
+        $psr_id = $this->input->post('psr_id');
+        
+        $Systemdate = $this->session->userdata('System_date');
+        $Route = $this->orders->getRoutebByPSR($psr_id, $Systemdate);
+        var_dump($Route);
+        if (!empty($Route)) {
+            
+            foreach ($Route as $subroute) {
+                $option .= '<option value="' . $subroute['id'] . '">' . $subroute['route'] . '</option>';
+            }
+            echo $option;
+            
+        }
+    }
+    
+    
 
     public function add_row() {
         $where = '';
@@ -157,6 +178,7 @@ class order extends CI_Controller {
         $type = $this->input->post('type');
 
         $route_id = $this->input->post('subroute');
+        $psr_id = $this->input->post('PSR');
         $outlet_id = $this->input->post('outlet');
         $db_id = $this->session->userdata('db_id');
 
@@ -184,6 +206,7 @@ class order extends CI_Controller {
             'shipping_date' => $System_date,
             'delivery_date' => $System_date,
             'db_id' => $db_id,
+            'psr_id' => $psr_id,            
             'so_status' => $so_status,
             'total_order' => $grand_total,
             'total_confirmed' => $grand_total,
