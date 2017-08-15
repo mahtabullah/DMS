@@ -29,18 +29,16 @@ class Login extends CI_Controller {
             foreach ($verify_user_status as $status) {
                 $user_status = $status['user_role_status'];
             }
-
             if ($user_status == 1) {
                 $user_role = $this->Logins->getUserRoleByUserId($user_id);
-
-
                 foreach ($user_role as $user_role_name) {
                     $user_role_id = $user_role_name['user_role_id'];
                 }
-                $user_role_name = $this->Logins->getUserRoleNameByUserId($user_role_id);
 
+                $user_role_name = $this->Logins->getUserRoleNameByUserId($user_role_id);
                 $emp_info = $this->Users->getEmpInfoByUserId($user_id);
                 $web_service_name = $this->Logins->getWebServiceName();
+
                 foreach ($user_role as $role) {
                     foreach ($emp_info['query'] as $info) {
                         foreach ($user_role_name as $user_role_names) {
@@ -48,24 +46,14 @@ class Login extends CI_Controller {
                         }
                     }
                 }
-
                 $db_id = $info['distribution_house_id'];
-
-
                 $db_name_info = $this->Users->getNameInfobyDbId($db_id);
+                $arrayData = array('dbhouse_name' => $db_name_info['dbhouse_name'], 'System_date' => $db_name_info['System_date'], 'db_address_name' => $db_name_info['address_name']);
 
-                if ($db_id != '') {
-                    $spoke_id = $this->Users->getDBHouseBySpokeId($db_id);
-                    $spoke_id = $spoke_id[0]['spoke_id'];
-                    //echo 'ok';
-                } else {
-                    $spoke_id = '';
-                }
+                $this->session->set_userdata($arrayData);
 
-                $this->session->set_userdata(array('dbhouse_name' => $db_name_info['dbhouse_name'],'System_date' => $db_name_info['System_date'], 'db_address_name' => $db_name_info['address_name'], 'spoke_id' => $spoke_id));
 
                 $user_role_id = $this->session->userdata('user_role');
-
                 $emp_id = $this->session->userdata('emp_id');
                 $biz_zone_id = $this->session->userdata('biz_zone_id');
 

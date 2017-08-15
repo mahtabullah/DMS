@@ -30,7 +30,14 @@
 <script src="<?php echo base_url(); ?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/datatables/extensions/FixedHeader/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>plugins/iCheck/icheck.min.js"></script>
-<script src="<?php echo base_url(); ?>plugins/js2/dataTables.tableTools.js"></script>
+<script>
+    var base_url = '<?php echo base_url(); ?>';
+</script>
+<script src="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript"
+        src="<?php echo base_url(); ?>plugins/js2/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript"
+        src="<?php echo base_url(); ?>plugins/js2/dataTables.tableTools.js"></script>
 
 
 
@@ -43,3 +50,5 @@
 
     });
 </script>
+
+ <title>IRIS-<?php echo $this->session->userdata('Report Name'); ?></title>

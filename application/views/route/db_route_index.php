@@ -107,6 +107,8 @@ $this->load->view('left/left', $data);
 <script>
     $(function () {
 
-        $('#routetable').DataTable();
+        $('#routetable').DataTable({
+            dom: 'T<"clear">lfrtip'
+        });
     });
 </script>

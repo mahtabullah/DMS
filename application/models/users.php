@@ -117,7 +117,7 @@ class Users extends CI_Model {
     }
 
     public function getNameInfobyDbId($db_id) {
-        $query = mysql_query("SELECT t1.*, t2.address_name FROM `tbld_distribution_house` as t1 Inner Join `tbld_address` as t2 On t1.dbhouse_address_id=t2.id where t1.id=$db_id");
+        $query = mysql_query("SELECT t1.*, t2.address_name FROM `tbld_distribution_house` as t1 Left Join `tbld_address` as t2 On t1.dbhouse_address_id=t2.id where t1.id=$db_id");
         $result = mysql_fetch_array($query);
         return $result;
     }
