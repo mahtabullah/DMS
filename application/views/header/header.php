@@ -7,6 +7,7 @@ $system_date = $this->session->userdata('System_date');
 <!DOCTYPE html>
 <html>
     <head>
+        <title id="title"></title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">        
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -63,7 +64,7 @@ $system_date = $this->session->userdata('System_date');
     </div>
     <div class="wrapper">
 
-        <header class="main-header"><a href="<?php echo base_url(); ?>home/home_page" class="logo">
+        <header class="main-header"><a href="#" class="logo">
                 <span class="logo-mini"><b>IRIS</b></span><span class="logo-lg"> <b>IRIS Admin</b>
                 </span> </a>
             <nav class="navbar navbar-static-top" role="navigation"><a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a>

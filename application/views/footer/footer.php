@@ -42,13 +42,19 @@
 
 
 <script>
-    jQuery(document).ready(function () {
+    $(document).ready(function () {
         var pathname = $(location).attr('href');
         $('[href="' + pathname + '"]').parent("li").addClass("active");
         $('[href="' + pathname + '"]').parent("li").parent("ul").parent("li").addClass("active");
         $('[href="' + pathname + '"]').parent("li").parent("ul").parent("li").parent("ul").parent("li").addClass("active");
+        
+        var ReportName=$('[href="' + pathname + '"]').text();
+                
+        
+        
+        document.getElementById("title").innerHTML ="IRIS | "+ReportName
 
     });
 </script>
+            
 
- <title>IRIS-<?php echo $this->session->userdata('Report Name'); ?></title>

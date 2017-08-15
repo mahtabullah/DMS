@@ -25,6 +25,10 @@ class order extends CI_Controller {
         $this->load->view('order/index', $data);
     }
     public function allorder() {
+       // 
+
+
+         $db_id = $this->session->userdata('db_id');        
         
         $this->load->view('order/allorder');
     }
