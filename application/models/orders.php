@@ -33,27 +33,22 @@ where t1.dist_emp_id=' . $psr_id . ' AND t1.planned_visit_date="' . $SystemDate 
         return $query;
     }
 
-    //////////////
     public function getSalesOrderInfo($where) {
-        $sql = "SELECT t4.sku_id,t5.sku_container_type_id,t6.name as container_name,t2.first_name as sr_name,(select outlet_name from tbld_outlet where id = t1.outlet_id) as outlet_name ,
-                t1.id,t1.so_id,date_format(t1.order_date_time,'%d-%m-%Y') as order_date,date_format(t1.order_date_time,'%d-%m-%Y') as order_date_time, 
-                date_format(t1.shipping_date,'%d-%m-%Y %h:%i:%s %p') as shipping_date,date_format(t1.delivery_date,'%d-%m-%Y') as delivery_date, 
-                t1.so_status,t1.total_order,t1.total_delivered,t1.manual_discount,t3.so_status_name,round(sum(t4.quantity_ordered/t7.ctn_size),2) as order_qty_ctn,round(sum(t4.quantity_delivered/t7.ctn_size),2) as delivered_qty_ctn
-                FROM tblt_sales_order as t1 
-                left join tbld_distribution_employee as t2 on t1.sr_id=t2.id 
-                left join tbld_sales_order_status as t3 on t1.so_status=t3.id
-                left join tblt_sales_order_line as t4 on t1.id=t4.so_id and t4.sku_order_type_id=1
-                left join tbld_sku as t5 on t4.sku_id=t5.id
-                left join tbld_container_type as t6 on t5.sku_container_type_id=t6.id 
-                inner join 
-                (SELECT t1.sku_id,max(t1.quantity) as ctn_size FROM `tbli_sku_mou_price_mapping` as t1
-                group by t1.sku_id) as t7 on t4.sku_id=t7.sku_id
-                where 1 $where  group by t4.so_id";
+       $sql = "SELECT t2.outlet_name,t3.first_name As PSR,t4.db_channel_element_name As sub_route,t6.Total_qty,t1.* FROM `tblt_sales_order` as t1
+                Inner join ( SELECT so_id,sum(quantity_ordered/Pack_size) as Total_qty FROM `tblt_sales_order_line` group by so_id ) As t6 on t6.so_id=t1.id
+                Inner join tbld_outlet as t2 on t1.outlet_id=t2.id
+                Inner join tbld_distribution_employee AS t3 on t3.id=t1.Psr_id
+                Inner join tbld_distribution_route as t4 on t4.id=t1.route_id
+                where 1 $where"
+               . "order by t1.Psr_id ";
         //echo $sql;die();
         $query = $this->db->query($sql)->result_array();
 
         return $query;
     }
+
+    //////////////
+
 
     public function getOrderQty($db_id, $so_id) {
         $sql = "SELECT $db_id as db_id,sku_id,unit_sale_price,sum(quantity_confirmed) as qty FROM `tblt_sales_order_line` where so_id=$so_id

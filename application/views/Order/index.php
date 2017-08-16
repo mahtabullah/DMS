@@ -2,14 +2,13 @@
 $this->load->view('header/header');
 $data['role'] = $this->session->userdata('user_role');
 $this->load->view('left/left', $data);
+$Systemdate = $this->session->userdata('System_date');
 ?>
 
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-        <h5 class="page-title">
-            <?php echo $sales_type . " "; ?>Order
-        </h5>
+       
         <ul class="page-breadcrumb breadcrumb">
             <li>
                 <i class="fa fa-home"></i>
@@ -44,11 +43,11 @@ $this->load->view('left/left', $data);
                                         <div class="form-group">
                                             <label class="control-label">Date Range</label>
                                             <div class="input-group date-picker input-daterange" >
-                                                <input type="text" class="form-control" name="date_frm" id="date_frm" value="" />
+                                                <input type="text" class="form-control" name="date_frm" id="date_frm" value="<?php echo date("d-m-Y", strtotime($Systemdate)); ?>" />
                                                 <span class="input-group-addon">
                                                     to
                                                 </span>
-                                                <input type="text" class="form-control" name="date_to" id="date_to" value="<?php ?>">
+                                                <input type="text" class="form-control" name="date_to" id="date_to" value="<?php echo date("d-m-Y", strtotime($Systemdate)); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -58,10 +57,11 @@ $this->load->view('left/left', $data);
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">PSR</label>
-                                             
-                                            <select class="form-control select2" id="PSR" onchange="">
+
+                                            <select class="form-control select2" name="PSR" id="PSR" onchange="">
+                                                <option ></option>
                                                 <?php foreach ($PSR As $Emp) { ?>                                                 
-                                                    <option ><?php echo $Emp[name]; ?></option>
+                                                <option value="<?php echo $Emp[id]; ?>" ><?php echo $Emp[name]; ?></option>
                                                     <?php
                                                 }
                                                 ?>  
@@ -70,16 +70,16 @@ $this->load->view('left/left', $data);
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label class="control-label">Sub Route</label>
-                                            <select class="form-control select2" id="market_list" onchange="">
+                                            <select class="form-control select2" id="Sub_Route" onchange="">
                                                 <option></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                   
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label">Outlet</label>
@@ -116,7 +116,7 @@ $this->load->view('left/left', $data);
 
 </div>
 
-<div id="sales_order_info">
+<div id="all_order_info">
 
 </div>
 
@@ -127,17 +127,42 @@ $this->load->view('footer/footer');
 ?>
 <script>
     $(document).ready(function () {
-        $("#PSR,#route_list,#sales_status,#market_list,#outlet").select2({
+
+        $("#PSR,#sales_status,#Sub_Route,#outlet").select2({
             placeholder: "Select",
             allowClear: true
         });
         $("#date_frm,#date_to").datepicker({
             format: 'dd-mm-yyyy',
             autoclose: true
-        });
 
+        });
+        getData();
     });
 
-function getRouteBySrAndDateRange(){};
+    function getRouteBySrAndDateRange() {}
 
+    function getData() {
+        var date_frm = $('#date_frm').val();
+        var date_to = $('#date_to').val();
+        var PSR = $('#PSR').val();
+        var Sub_Route = $('#Sub_Route').val();
+        var sales_status = $('#sales_status').val();
+
+        $('#ajax_load').css("display", "block");
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>order/allorder/",
+            data: {date_frm: date_frm, date_to: date_to, PSR: PSR, Sub_Route: Sub_Route, sales_status: sales_status},
+            dataType: "html",
+            success: function (data) {
+                $("#all_order_info").html(data);
+                $('#sample_3').DataTable( {
+                dom: 'T<"clear">frtip',
+                
+            });
+                $('#ajax_load').css("display", "none");
+            }
+        });
+    }
 </script>

@@ -12,7 +12,7 @@ class order extends CI_Controller {
         $this->load->model('Bundle_prices');
         $this->load->model('Outlets');
         $this->load->model('Route_plans');
-        
+
 
         // $this->method_call = &get_instance();
     }
@@ -26,13 +26,37 @@ class order extends CI_Controller {
         $data["PSR"] = $this->orders->getDbpSrList($db_id);
         $this->load->view('order/index', $data);
     }
+
     public function allorder() {
-       // 
-
-
-         $db_id = $this->session->userdata('db_id');        
+       
+        $date_start = $this->input->post('date_frm');
+        $date_end = $this->input->post('date_to');
+        $PSR = $this->input->post('PSR');
+        $Sub_Route = $this->input->post('sales_order_type');
+        $sales_status = $this->input->post('sales_order_type');
+        $db_id = $this->session->userdata('db_id');
+        $date_frm=date("Y-m-d", strtotime($date_start));
+        $date_to=date("Y-m-d", strtotime($date_end));
+        $where='AND t1.db_id='.$db_id;
         
-        $this->load->view('order/allorder');
+        if(!empty($date_frm)&&!empty($date_to)){           
+        $where.=' AND planned_order_date BETWEEN "'.$date_frm.'" AND "'.$date_to.'" ';
+        }        
+        if(!empty($PSR)){           
+        $where.='AND t1.psr_id='.$PSR;
+        }
+         if(!empty($Sub_Route)){           
+        $where.='AND t1.route_id='.$Sub_Route;
+        }
+        if(!empty($sales_status)){           
+        $where.='AND t1.so_status='.$sales_status;
+        }
+        
+        
+        
+        $data["Order"]=$this->orders->getSalesOrderInfo($where);
+        
+       $this->load->view('order/allorder',$data);
     }
 
     public function create() {
@@ -40,20 +64,18 @@ class order extends CI_Controller {
         $data['outlet_type_name'] = $this->orders->getsalesTypes();
         $this->load->view('order/create', $data);
     }
-    
-    
 
     public function getInfoSales_order_type() {
         $type = $this->input->post('sales_order_type');
         $db_id = $this->session->userdata('db_id');
-       
+
         $data['type'] = $type;
         if ($type == 'regular') {
             $data['title'] = 'Regular Sales';
             $data['PSR'] = $this->Route_plans->getDbpSrList($db_id);
             //$data['subroute'] = $this->orders->getAllsubroute($db_id);
 
-           $this->load->view('order/part/regular.php', $data);
+            $this->load->view('order/part/regular.php', $data);
         } else if ($type == 'regular_from_pc') {
             $data['title'] = 'Regular Sales';
             $data['subroute'] = $this->orders->getAllsubroute($db_id);
@@ -73,7 +95,7 @@ class order extends CI_Controller {
         $Systemdate = $this->session->userdata('System_date');
         $outlet = $this->orders->getOutletBySubroute($sub_route, $Systemdate);
         if (!empty($outlet)) {
-            
+
             foreach ($outlet as $name) {
                 $option .= '<option value="' . $name['id'] . '">' . $name['name'] . '</option>';
             }
@@ -81,23 +103,21 @@ class order extends CI_Controller {
             echo $option;
         }
     }
+
     public function getRoutebByPSR() {
         $psr_id = $this->input->post('psr_id');
-        
+
         $Systemdate = $this->session->userdata('System_date');
         $Route = $this->orders->getRoutebByPSR($psr_id, $Systemdate);
         var_dump($Route);
         if (!empty($Route)) {
-            
+
             foreach ($Route as $subroute) {
                 $option .= '<option value="' . $subroute['id'] . '">' . $subroute['route'] . '</option>';
             }
             echo $option;
-            
         }
     }
-    
-    
 
     public function add_row() {
         $where = '';
@@ -206,7 +226,7 @@ class order extends CI_Controller {
             'shipping_date' => $System_date,
             'delivery_date' => $System_date,
             'db_id' => $db_id,
-            'psr_id' => $psr_id,            
+            'psr_id' => $psr_id,
             'so_status' => $so_status,
             'total_order' => $grand_total,
             'total_confirmed' => $grand_total,
@@ -251,8 +271,7 @@ class order extends CI_Controller {
     }
 
     //////////////////////////////////////////////
-   
-   
+
     /**
      *
      * @param int   $db_id
@@ -263,8 +282,6 @@ class order extends CI_Controller {
      *
      * @return boolean
      */
-   
-   
     public function getUnit() {
         $sku_id = $this->input->post('sku_id');
         $get_unit = $this->orders->getUnit($sku_id);
@@ -310,7 +327,6 @@ class order extends CI_Controller {
         echo $option;
     }
 
-
     public function getDdPrice() {
         $uom_id = $this->input->post('uom_id');
         $sku_id = $this->input->post('sku_id');
@@ -352,6 +368,4 @@ class order extends CI_Controller {
         echo json_encode($mou_unit);
     }
 
-   
-  
 }
