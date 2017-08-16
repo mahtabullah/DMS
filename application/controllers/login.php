@@ -88,9 +88,9 @@ class Login extends CI_Controller {
         }
     }
 
-    public function user_logout() {
+    public function user_logout($id) {
         $this->session->set_userdata(array('user_id' => '', 'user_role' => ''));
-        $data['incorrectLogin_flag'] = 0;
+        $data['incorrectLogin_flag'] = $id;
         $this->load->view('login/login', $data);
     }
 

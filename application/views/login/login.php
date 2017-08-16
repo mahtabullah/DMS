@@ -40,6 +40,10 @@
             echo "<label style='color:red;'> Invalid Time Slot </label>";
         }else if ($incorrectLogin_flag == 4) {
             echo "<label style='color:red;'> DB is inactive </label>";
+        }else if ($incorrectLogin_flag == 20) {
+            echo "<label style='color:green;'> Day End Success full</label>";
+        }else if ($incorrectLogin_flag == 21) {
+            echo "<label style='color:red;'> Day End Not Possible</label>";
         }
 
         ?>

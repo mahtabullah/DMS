@@ -22,6 +22,12 @@ class DB_houses extends CI_Model
         $sql = "INSERT INTO `purchase_order_sequence`(`db_house_id`, `serial`) VALUES ('$db_house_id','0')";
         mysql_query( $sql );
     }
+    public function Day_end($previousDate,$newDate,$db_house_id )
+    {
+        echo $sql = 'update tbld_distribution_house set System_date="'.$newDate.'",Previous_System_date="'.$previousDate.'" where id='.$db_house_id;
+        mysql_query( $sql );
+        return true;
+    }
     
     
     public function getDistributionHouseProfileInfo ($db_id) {
