@@ -8,7 +8,7 @@ $Systemdate = $this->session->userdata('System_date');
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-       
+
         <ul class="page-breadcrumb breadcrumb">
             <li>
                 <i class="fa fa-home"></i>
@@ -61,7 +61,7 @@ $Systemdate = $this->session->userdata('System_date');
                                             <select class="form-control select2" name="PSR" id="PSR" onchange="">
                                                 <option ></option>
                                                 <?php foreach ($PSR As $Emp) { ?>                                                 
-                                                <option value="<?php echo $Emp[id]; ?>" ><?php echo $Emp[name]; ?></option>
+                                                    <option value="<?php echo $Emp[id]; ?>" ><?php echo $Emp[name]; ?></option>
                                                     <?php
                                                 }
                                                 ?>  
@@ -157,10 +157,11 @@ $this->load->view('footer/footer');
             dataType: "html",
             success: function (data) {
                 $("#all_order_info").html(data);
-                $('#sample_3').DataTable( {
-                dom: 'T<"clear">frtip',
-                
-            });
+                $('#sample_3').DataTable({
+
+                    "sDom": 'T<"clear">lfrtip'
+                   
+                });
                 $('#ajax_load').css("display", "none");
             }
         });

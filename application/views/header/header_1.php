@@ -20,7 +20,10 @@ $system_date = $this->session->userdata('System_date');
         <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/datepicker/datepicker3.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/timepicker/bootstrap-timepicker.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/datatables/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
 
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js2/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js2/dataTables.tableTools.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/select2/select2.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/skins/_all-skins.min.css">

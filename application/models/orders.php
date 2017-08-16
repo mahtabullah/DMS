@@ -40,7 +40,7 @@ where t1.dist_emp_id=' . $psr_id . ' AND t1.planned_visit_date="' . $SystemDate 
                 Inner join tbld_distribution_employee AS t3 on t3.id=t1.Psr_id
                 Inner join tbld_distribution_route as t4 on t4.id=t1.route_id
                 where 1 $where"
-               . "order by t1.Psr_id ";
+               . " order by t1.Psr_id ";
         //echo $sql;die();
         $query = $this->db->query($sql)->result_array();
 

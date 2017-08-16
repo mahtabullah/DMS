@@ -48,8 +48,13 @@ class Login extends CI_Controller {
                 }
                 $db_id = $info['distribution_house_id'];
                 $db_name_info = $this->Users->getNameInfobyDbId($db_id);
-                $arrayData = array('dbhouse_name' => $db_name_info['dbhouse_name'], 'System_date' => $db_name_info['System_date'], 'db_address_name' => $db_name_info['address_name']);
-
+                $System_date=$db_name_info['System_date'];
+                if(empty($System_date)){
+                    $System_date=date('Y-m-d');
+                   // $System_date="2017-08-14";
+                }
+                $arrayData = array('dbhouse_name' => $db_name_info['dbhouse_name'], 'System_date' => $System_date, 'db_address_name' => $db_name_info['address_name']);
+               
                 $this->session->set_userdata($arrayData);
 
 
@@ -70,7 +75,7 @@ class Login extends CI_Controller {
                         $this->Homes->user_info_log($user_id, $biz_zone_id, $emp_id, $user_role_id);
                     }
 
-                    redirect(site_url('home/home_page'));
+                   redirect(site_url('home/home_page'));
                 }
             } else {
 

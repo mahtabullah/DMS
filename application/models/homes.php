@@ -40,8 +40,7 @@ class Homes extends CI_Model {
     {
         $where = ($db_id !='') ? " and t1.db_id=$db_id":"";
         
-        $sql = "SELECT count(t1.so_id) as t
-        FROM `tblt_sales_order` as t1 
+        $sql = "SELECT count(t1.so_id) as t        FROM `tblt_sales_order` as t1 
         inner join `tblt_sales_order_line` as t2 on t1.id=t2.so_id
         where t2.sku_order_type_id=1 and date(t1.order_date_time) = '$current_date' $where";
        
@@ -557,10 +556,28 @@ sum((t1.total_order)) as order_value,sum((t2.quantity_ordered*t3.sku_waight_valu
     function new_order_qty($start_date,$end_date,$db_ids){
         $where = ($db_ids !='') ? " and db_id $db_ids" : "";
         
-        $sql = "SELECT count(id) as num_of_order 
-                FROM `tblt_sales_order` 
-                where date(order_date_time) 
+         $sql = "SELECT count(id)as Number_of_order FROM `tblt_sales_order` 
+                where 	planned_order_date 
                 between '$start_date' and '$end_date' $where";
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+    function Total_Schedule_Call($start_date,$end_date,$db_ids){
+        $where = ($db_ids !='') ? " and t1.dbhouse_id $db_ids" : "";
+        
+         $sql = "SELECT count(t2.id) As SC FROM `tblt_route_plan_detail` as t1
+                INNER join tbld_outlet as t2 on t1.route_id=t2.parent_id
+                where t2.status=1 And t1.planned_visit_date 
+                between '$start_date' and '$end_date' $where";
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+    
+    function total_outlet($db_ids){
+        $where = ($db_ids !='') ? " and dbhouse_id $db_ids" : "";
+        
+         $sql = "SELECT count(id)as Number_of_outlet FROM `tbld_outlet` 
+                where status=1 $where";
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
