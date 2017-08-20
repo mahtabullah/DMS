@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/xampp/htdocs/DMS/application/controllers/stock.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/models/bundle_prices.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/views/stock/new_stock.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/controllers/order.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/views/stock/Current_stock.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/models/stocks.php</file>
+            <file>file:/D:/xampp/htdocs/DMS/application/views/left/left_DB.php</file>
+        </group>
     </open-files>
 </project-private>

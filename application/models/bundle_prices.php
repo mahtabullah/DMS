@@ -99,6 +99,21 @@
             $query = $this->db->query($sql)->result_array();
             return $query;
         }
+        public function getBundleDetailbySkuforStock($sku_id, $db_id)
+        {
+            $sql = "SELECT t1.*,t2.id,t2.bundle_price_id,t2.sku_id,t4.sku_code,t2.mou_id,t2.quantity,
+                    FORMAT(MIN(t2.db_lifting_price), 4)  as unit_price, t3.unit_name ,t5.qty
+                    FROM `tbli_db_bundle_price_mapping` as t1 
+                    Inner Join `tbld_bundle_price_details` as t2 
+                    On t2.bundle_price_id=t1.bundle_price_id
+                    Inner Join tbld_unit as t3 on t2.mou_id=t3.id
+                    Inner Join tbld_sku as t4 on t2.sku_id=t4.id
+                    inner join tbld_unit as t5 on t5.id=t4.db_default_mou_id
+                    Where t2.sku_id=$sku_id and t1.db_id=$db_id";
+            
+            $query = $this->db->query($sql)->result_array();
+            return $query;
+        }
         
         public function get_all_bundle_details($id)
         {

@@ -3,7 +3,7 @@
 class stocks extends CI_Model {
 
     function current_stock($db_ids) {
-        $sql = "SELECT t1.db_id,t4.id,t4.sku_name,round(t2.db_lifting_price,4) AS Price,t5.qty As Pack_Size,IFNULL(t3.qty,0) As Total_Qty 
+        $sql = "SELECT t1.db_id,t4.id,t4.sku_name,round(t2.db_lifting_price,4) AS Price,t5.qty As Pack_Size,IFNULL(t3.qty,0)/t5.qty As Total_Qty,floor(IFNULL(t3.qty,0)/t5.qty) As Total_Qty_cs ,IFNULL(t3.qty,0)%t5.qty as Total_Qty_ps
             FROM `tbli_db_bundle_price_mapping` as t1
             left join tbld_bundle_price_details as t2 on t1.bundle_price_id=t2.bundle_price_id
             LEFT join tblt_inventory as t3 on t3.sku_id=t2.sku_id

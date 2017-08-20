@@ -58,7 +58,7 @@
                         <a href="#"><i class="fa fa-circle-o"></i> Purchase Activity <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
 
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Purchase Entry <i class="fa fa-angle-left pull-right"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>stock/new_stock"><i class="fa fa-circle-o"></i> Purchase Entry </a></li>
 
                         </ul>
                     </li>
