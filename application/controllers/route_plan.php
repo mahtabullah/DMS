@@ -82,7 +82,7 @@ class Route_plan extends CI_Controller {
 
         $date_strt = date("Y-m-d", strtotime($_POST['date_frm']));
         $date_end = date("Y-m-d", strtotime($_POST['date_to']));
-
+       // $date_strt="2017-08-16";
         $day_wise_route = array(
             '0' => $_POST['sat_routes'],
             '1' => $_POST['sun_routes'],
@@ -92,6 +92,15 @@ class Route_plan extends CI_Controller {
             '5' => $_POST['thu_routes'],
             '6' => $_POST['fri_routes']
         );
+
+
+        //var_dump($day_wise_route);
+
+
+
+
+
+
 
         $route_plan = array(
             'route_plan_name' => $rp_name,
@@ -109,6 +118,22 @@ class Route_plan extends CI_Controller {
 
         $insert_into_route_plan = $this->Route_plans->insertData('tbld_route_plan', $route_plan);
 
+        // $insert_into_route_plan = 2;
+        for ($z = 0; $z < 7; $z++) {
+            if ($day_wise_route[$z][0] != "NONE") {
+                $current_route_plan = array(
+                    'route_plan_id' => $insert_into_route_plan,
+                    'route_id' => $day_wise_route[$z][0],
+                    'dbhouse_id' => $db_id,
+                    'Psr_id' => $psr,
+                    'day' => $z
+                );
+                $insert_current_route_plan = $this->Route_plans->insertData('tblt_current_route_plan', $current_route_plan);
+            }
+            //  echo'<pre>';
+            //  var_dump($current_route_plan);
+            //  echo'</pre>';
+        }
 
 
 

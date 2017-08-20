@@ -6,7 +6,7 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <h3 class="page-title">
-                   Sub Route Plans
+                   Current Stock
                 </h3>
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
@@ -15,7 +15,7 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="">Sub Route Plan</a>
+                        <a href="">Current Stock</a>
                     </li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
@@ -36,24 +36,17 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
             <div class="box-title">
                 
                  <div class="box-header with-border">
-                  <h3 class="box-title">Sub Route Plans</h3>
+                  <h3 class="box-title">Current Stock</h3>
                   <div class="box-tools pull-right">
                      <div class="actions">
-                            <a href="<?php echo site_url('route_plan/makeRoutePlan'); ?>" class="btn btn- btn-success pull-right" id="add_route"><i class="fa fa-plus"></i> Create Sub Route Plan</a>
+                           
                         </div>
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                
             </div>
             <div class="box-body">
-                <?php // echo $this->pagination->create_links(); ?>
-<!--                <div style="text-align: center;margin: 0 auto;margin-top: 10px;margin-bottom: -24px;position: relative; z-index: 1000;width: 400px;">
-                <form action ="<?=base_url()?>route_plan/index" method="post" id="searchform">
-                    Search: 
-                    <input type="text" name="searchterm" placeholder="Search Sales Representative" id="searchterm"  value="<?=$searchterm?>" style="width: 200px;" /> 
-                    <input type="submit" value="Search" id="submit" />
-                </form>
-                </div>-->
+             
                 <table class="table table-striped table-bordered table-hover table-full-width" id="sample_4">
                     <thead>
                         <tr>
@@ -61,73 +54,43 @@ $data['role']=$this->session->userdata('user_role');$this->load->view('left/left
                                 SL No.
                             </th>
                             <th>
-                                Route Plan Name
+                                Sku name
                             </th>
                             <th>
-                                Route Plan Code
+                                Pack Size
                             </th>
                                                        
                             <th>
-                                Distributor Name
+                                Price
                             </th>
                             <th>
-                                PSR Name
+                                Total_Qty
                             </th>
-                            <th>
-                                Start Date
-                            </th>
-                            <th>
-                                End Date
-                            </th>
-                            <th>
-                                Modify date
-                            </th>
-                            <th>
-                                Action
-                            </th>
+                          
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                         $sl=1;
-                        foreach ($Route_plan as $rp_i) { ?>
+                        foreach ($current_stock as $rp_i) { ?>
                             <tr>
                                 <td>
                                     <?php echo $sl;$sl++; ?>
                                 </td>
                                 <td>
-                                    <?php echo $rp_i['route_plan_name']; ?>
+                                    <?php echo $rp_i['sku_name']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $rp_i['route_plan_code']; ?>
+                                    <?php echo $rp_i['Pack_Size']; ?>
                                 </td>
                                
                                 <td>
-                                    <?php echo $rp_i['dbhouse_name']; ?>
+                                    <?php echo $rp_i['Price']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $rp_i['first_name']; ?>
+                                    <?php echo $rp_i['Total_Qty']; ?>
                                 </td>
-                                <td>
-                                    <?php echo date('d-m-Y',strtotime($rp_i['start_date'])); ?>
-                                </td>
-                                <td>
-                                    <?php echo date('d-m-Y',strtotime($rp_i['end_date'])); ?>
-                                </td>
-                                 <td>
-                                    <?php echo date('d-m-Y',strtotime($rp_i['Modify_date'])); ?>
-                                </td>
-                                <td class="">
-                                    <a href="<?php
-                                    $segments = array('route_plan', 'index_edit',$rp_i['id']);
-                                    echo site_url($segments);
-                                    ?>" data-id="1" class="btn btn-xs blue btn-editable" onclick="return confirm('Are you sure Edit this item?')"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="<?php
-                                    $segments = array('route_plan', 'index_delete',$rp_i['id']);
-                                    echo site_url($segments);
-                                    ?>" data-id="1" class="btn btn-xs red btn-editable" onclick="return confirm('Are you sure you want to delete this item?')"><i class="fa fa-times"></i> Delete</a>
-                                </td>
-
+                               
                             </tr>
                         <?php } ?>
                     </tbody>

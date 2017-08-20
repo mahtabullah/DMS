@@ -79,13 +79,13 @@ $this->load->view('footer/footer');
             success: function (data) {
                 $("#outlet_part").html(data);
                 $("#order_part").html('');
-                gerOrderPart();
+                getOrderPart();
                 
             }
         });
     }
 
-    function gerOrderPart() {
+    function getOrderPart() {
         
         var outlet_id = $("#outlet").val();
         $("#order_part").html('');

@@ -62,8 +62,17 @@
 
                         </ul>
                     </li>
+                    
 
                 </ul>
+            </li>
+            <li class="">
+                <a href="<?php echo base_url(); ?>stock">
+                    <i class="fa fa-th-list"></i>
+                    <span class="title">
+                        Stock
+                    </span>
+                </a>
             </li>
 
         </ul>

@@ -1,0 +1,4 @@
+SELECT t1.sku_id,t1.outlet_lifting_price,t2.* FROM  tbld_bundle_price_details as t1
+LEFT join tblt_inventory as t2 on t1.sku_id=t2.sku_id
+INNER join tbli_db_bundle_price_mapping as t3 on t3.bundle_price_id=t1.bundle_price_id
+where t3.db_id=1
